@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Psychic Game
+    </title>
+</head>
+
+<body>
+
+    <div id="game">
+
+        <h3>The Psychic Game</h3>
+        <p>Guess what letter I'm thinking of</p>
+        <p id="wins"></p>
+        <p id="losses"></p>
+        <p id="guess"></p>
+        <p id="usedLetters"></p>
+
+    </div>
+    <script type="text/javascript">
+
+
+
+        //Define available letters (array)
+
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+
+        //Define wins, losse & # of guesses
+
+        var wins = 0;
+        var losses = 0;
+        var guess = 10;
+        var usedLetters = "";
+
+        console.log(wins);
+        console.log(losses);
+        console.log(guess);
+        console.log(usedLetters);
+
+        // This function is run whenever the user presses a key
+
+        //document.onkeyup = function (event) {
+
+        //Define wins, losse & # of guesses
+
+
+
+        //Generates random computer letter selection from alphabet
+
+        var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        // Determines which key was pressed
+
+
+
+        //Track which letters have been used
+        document.getElementById("wins").innerHTML = "Wins: " + wins;
+        document.getElementById("losses").innerHTML = "Losses: " + losses;
+        document.getElementById("guess").innerHTML = "Guesses left: " + guess;
+        document.getElementById("usedLetters").innerHTML = "Your Guesses so far: " + usedLetters;
+
+
+
+        function gameUpdate() {
+            document.getElementById("wins").innerHTML = "Wins: " + wins;
+            document.getElementById("losses").innerHTML = "Losses: " + losses;
+            document.getElementById("guess").innerHTML = "Guesses left: " + guess;
+            document.getElementById("usedLetters").innerHTML = "Your Guesses so far: " + usedLetters;
+        }
+        //Tracks wins/loss/tie & # of Guesses
+
+
+        document.onkeyup = function (event) {
+            for (i = 0; i < alphabet.length; i++) {
+                if (alphabet[i] == event.key) {
+                    if (event.key == computerGuess) {
+                        // PLayer Win
+                        //alert player
+                        alert("User Wins!")
+                        wins++;
+
+                        //reset guesses left
+                        guess = 9;
+                        //reset used letters
+                        usedLetters = "";
+
+                        computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+                    }
+                    else {
+                        //player loses a guess
+                        usedLetters = usedLetters + event.key + ", ";
+                        guess -= 1;
+                        gameUpdate();
+
+                        //if the guess=0
+
+                        if (guess == 0) {
+                            alert("User Loses!")
+                            losses++
+
+                            //reset guesses left
+                            guess = 9;
+
+                            //reset used letters
+                            usedLetters = "";
+
+                            computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+                            gameUpdate();
+                        }
+                        //reset guess left
+                        //reset used letters
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        //Console Logs
+        console.log(computerGuess);
+        console.log(wins);
+
+        //}
+
+
+
+    </script>
+
+
+</body>
+
+</html>
